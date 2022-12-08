@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  postgres:
+    container_name: postgres_ai
+    image: postgres:latest
+    env_file:
+      database.conf
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./backend/data/database:/var/lib/postgresql
+    cpus: 0.5
+    mem_limit: 500M
+  pgadmin:
+    container_name: pgadmin_ai
+    image: dpage/pgadmin4
+    depends_on:
+      - postgres
+    ports:
+      - "8060:8060"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: user
+      PGADMIN_LISTEN_PORT: 8060
+    cpus: 0.5
+    mem_limit: 500M
