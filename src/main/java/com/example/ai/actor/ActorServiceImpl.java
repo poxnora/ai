@@ -28,7 +28,6 @@ public class ActorServiceImpl implements ActorService {
     public Actor getActorById(Long id) {
         return actorRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("No actor with id: " + id + " found"));
     }
-
     @Override
     public List<Actor> getActors(int pageNo, int pageSize, String sortBy, String sortOrder) {
 
