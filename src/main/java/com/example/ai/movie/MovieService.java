@@ -9,7 +9,7 @@ public interface MovieService {
 
     Movie getMovieByTitle(String title);
 
-    List<Movie> getMovies(int pageNo, int pageSize, String sortBy, String sortOrder);
+    List<Movie> getMovies(int pageNo, int pageSize, String sortBy, String sortOrder, String search);
 
     Movie addMovie(Movie actor);
 

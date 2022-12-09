@@ -1,31 +1,31 @@
 import React, {Component} from "react";
-import ActorDataService from "../services/actor.service";
+import MovieDataService from "../services/movie.service";
 import {Link} from "react-router-dom";
 
-export default class ActorList extends Component {
+export default class MovieList extends Component {
     constructor(props) {
         super(props);
         this.onChangeSearch = this.onChangeSearch.bind(this);
-        this.retrieveActors = this.retrieveActors.bind(this);
+        this.retrieveMovies = this.retrieveMovies.bind(this);
         this.refreshList = this.refreshList.bind(this);
-        this.setActiveActors = this.setActiveActors.bind(this);
+        this.setActiveMovies = this.setActiveMovies.bind(this);
         this.search = this.search.bind(this);
-        this.sortFirstName = this.sortFirstName.bind(this);
-        this.sortLastName = this.sortLastName.bind(this);
-        this.sortAge = this.sortAge.bind(this);
+        this.sortTitle = this.sortTitle.bind(this);
+
 
         this.state = {
-            actors: [],
-            currentActor: null,
+            movies: [],
+            currentMovie: null,
             currentIndex: -1,
             search: "",
+            actors: [],
             params: {},
         };
 
     }
 
     componentDidMount() {
-        this.retrieveActors();
+        this.retrieveMovies();
     }
 
     onChangeSearch(e) {
@@ -36,15 +36,15 @@ export default class ActorList extends Component {
         });
     }
 
-    retrieveActors(sort) {
+    retrieveMovies(sort, search) {
         if (sort === undefined)
             sort = "id";
         this.state.params["sortBy"] = sort;
         this.state.params["search"] = this.state.search;
-        ActorDataService.getAll(this.state.params)
+        MovieDataService.getAll(this.state.params)
             .then(response => {
                 this.setState({
-                    actors: response.data
+                    movies: response.data
                 });
                 console.log(response.data);
             })
@@ -54,16 +54,16 @@ export default class ActorList extends Component {
     }
 
     refreshList() {
-        this.retrieveActors();
+        this.retrieveMovies();
         this.setState({
-            currentTutorial: null,
+            currentMovie: null,
             currentIndex: -1
         });
     }
 
-    setActiveActors(actor, index) {
+    setActiveMovies(actor, index) {
         this.setState({
-            currentActor: actor,
+            currentMovie: actor,
             currentIndex: index
         });
     }
@@ -75,38 +75,21 @@ export default class ActorList extends Component {
             currentActor: null,
             currentIndex: -1
         });
-        this.retrieveActors();
+        this.retrieveMovies();
     }
 
-    sortFirstName() {
-        let sort = 'firstName';
+    sortTitle() {
+        let sort = 'Title';
         this.setState({
             currentIndex: -1
         });
-        this.retrieveActors(sort);
+        this.retrieveMovies(sort);
 
     }
 
-    sortLastName() {
-        let sort = 'lastName';
-        this.setState({
-            currentIndex: -1
-        });
-        this.retrieveActors(sort);
-
-    }
-
-    sortAge() {
-        let sort = 'age';
-        this.setState({
-            currentIndex: -1
-        });
-        this.retrieveActors(sort);
-
-    }
 
     render() {
-        const {search, actors: actors, currentActor: currentActor, currentIndex} = this.state;
+        const {search, movies: movies, currentMovie: currentMovie, currentIndex} = this.state;
 
         return (
             <div className="list row">
@@ -131,38 +114,32 @@ export default class ActorList extends Component {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <h4>Actors List</h4>
-                    <button className="btn btn-outline-secondary w-33"
-                            type="button" onClick={this.sortFirstName}>First Name
-                    </button>
-                    <button className="btn btn-outline-secondary w-33"
-                            type="button" onClick={this.sortLastName}>Last Name
-                    </button>
-                    <button className="btn btn-outline-secondary w-33"
-                            type="button" onClick={this.sortAge}>Age
+                    <h4>Movies List</h4>
+                    <button className="btn btn-outline-secondary 50"
+                            type="button" onClick={this.sortTitle}>Title
                     </button>
                     <ul className="list-group">
                         <br>
                         </br>
 
-                        {actors &&
-                            actors.map((actor, index) => (
+                        {movies &&
+                            movies.map((movies, index) => (
                                 <li
                                     className={
                                         "list-group-item " +
                                         (index === currentIndex ? "active" : "")
                                     }
-                                    onClick={() => this.setActiveActors(actor, index)}
+                                    onClick={() => this.setActiveMovies(movies, index)}
                                     key={index}
                                 >
-                                    {actor.firstName} {actor.lastName}
+                                    {movies.title}
                                 </li>
                             ))}
                     </ul>
 
                 </div>
                 <div className="col-md-6">
-                    {currentActor ? (
+                    {currentMovie ? (
                         <div>
                             <h4>Details</h4>
                             <br>
@@ -171,39 +148,46 @@ export default class ActorList extends Component {
                             </br>
                             <div>
                                 <label>
-                                    <strong>First name:</strong>
+                                    <strong>Title:</strong>
                                 </label>{" "}
-                                {currentActor.firstName}
+                                {currentMovie.title}
                             </div>
                             <div>
                                 <label>
-                                    <strong>Last name:</strong>
+                                    <strong>Description:<br>
+                                    </br></strong>
                                 </label>{" "}
-                                {currentActor.lastName}
+                                <br>
+                                </br>
+                                {currentMovie.description}
                             </div>
                             <div>
                                 <label>
-                                    <strong>Age:</strong>
+                                    <strong>Genre:</strong>
                                 </label>{" "}
-                                {currentActor.age}
+                                {currentMovie.genre}
                             </div>
                             <div>
                                 <label>
-                                    <strong>Country:</strong>
+                                    <strong>Actors:</strong>
                                 </label>{" "}
-                                {currentActor.country}
+                                {Object.keys(currentMovie.actors).map(function (keyName, keyIndex) {
+                                    return (
+                                        <li key={keyName}>
+                                            {currentMovie.actors[keyName]["firstName"]} {currentMovie.actors[keyName]["lastName"]}
+
+                                        </li>
+                                    )
+
+                                })}
+                                <br>
+                                </br>
                             </div>
                             <Link
-                                to={"/actors/" + currentActor.id}
-                                className="badge badge-primary w-100 p-2"
+                                to={"/movies/" + currentMovie.id}
+                                className="badge badge-primary w-50 p-2"
                             >
                                 Edit
-                            </Link>
-                            <Link
-                                to={"/actors-movies/" + currentActor.id}
-                                className="badge badge-success w-100 p-2"
-                            >
-                                Movies
                             </Link>
                         </div>
                     ) : (

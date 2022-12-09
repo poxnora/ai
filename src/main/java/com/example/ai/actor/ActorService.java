@@ -6,7 +6,7 @@ public interface ActorService {
 
     Actor getActorById(Long id);
 
-    List<Actor> getActors(int pageNo, int pageSize, String sortBy, String sortOrder);
+    List<Actor> getActors(int pageNo, int pageSize, String sortBy, String sortOrder, String search);
 
     Actor addActor(Actor actor);
 

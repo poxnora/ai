@@ -22,14 +22,11 @@ public class MovieController {
     public ResponseEntity<List<Movie>> getMovies(@RequestParam(value = "pageNo", defaultValue = "0", required = false) Integer pageNo,
                                                  @RequestParam(value = "pageSize", defaultValue = "100", required = false) Integer pageSize,
                                                  @RequestParam(value = "sortBy", defaultValue = "id", required = false) String sortBy,
-                                                 @RequestParam(value = "sortOrder", defaultValue = "asc", required = false) String sortDir) {
-        return ResponseEntity.ok(movieService.getMovies(pageNo, pageSize, sortBy, sortDir));
+                                                 @RequestParam(value = "sortOrder", defaultValue = "asc", required = false) String sortDir,
+                                                 @RequestParam(value = "search", required = false) String search) {
+        return ResponseEntity.ok(movieService.getMovies(pageNo, pageSize, sortBy, sortDir, search));
     }
 
-    @GetMapping(path = "/title/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Movie> getMovieByTitle(@PathVariable("title") String title) {
-        return ResponseEntity.ok(movieService.getMovieByTitle(title));
-    }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Movie> getMovieById(@PathVariable("id") Long id) {

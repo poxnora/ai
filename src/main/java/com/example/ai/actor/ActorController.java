@@ -22,8 +22,9 @@ public class ActorController {
     public ResponseEntity<List<Actor>> getActors(@RequestParam(value = "pageNo", defaultValue = "0", required = false) Integer pageNo,
                                                  @RequestParam(value = "pageSize", defaultValue = "100", required = false) Integer pageSize,
                                                  @RequestParam(value = "sortBy", defaultValue = "id", required = false) String sortBy,
-                                                 @RequestParam(value = "sortOrder", defaultValue = "asc", required = false) String sortDir) {
-        return ResponseEntity.ok(actorService.getActors(pageNo, pageSize, sortBy, sortDir));
+                                                 @RequestParam(value = "sortOrder", defaultValue = "asc", required = false) String sortDir,
+                                                 @RequestParam(value = "search", required = false) String search) {
+        return ResponseEntity.ok(actorService.getActors(pageNo, pageSize, sortBy, sortDir, search));
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

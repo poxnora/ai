@@ -22,6 +22,7 @@ public class Actor {
     private String firstName;
     private String lastName;
     private Integer age;
+    private String country;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "actors_movies", joinColumns = {@JoinColumn(name = "users_id")}, inverseJoinColumns = {@JoinColumn(name = "movies_id")})
     @ToString.Exclude

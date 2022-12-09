@@ -28,15 +28,22 @@ public class ActorServiceImpl implements ActorService {
     public Actor getActorById(Long id) {
         return actorRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("No actor with id: " + id + " found"));
     }
+
     @Override
-    public List<Actor> getActors(int pageNo, int pageSize, String sortBy, String sortOrder) {
+    public List<Actor> getActors(int pageNo, int pageSize, String sortBy, String sortOrder, String search) {
 
         Sort sort = sortOrder.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
         PageRequest pageRequest = PageRequest.of(pageNo, pageSize, sort);
+        Page<Actor> pagingUser;
 
-        Page<Actor> pagingUser = actorRepository.findAll(pageRequest);
+        if (search != null) {
+            pagingUser = actorRepository.findActorByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(search, search, pageRequest);
+            return pagingUser.getContent();
+        }
+        pagingUser = actorRepository.findAll(pageRequest);
         return pagingUser.getContent();
+
     }
 
     @Override
@@ -47,6 +54,7 @@ public class ActorServiceImpl implements ActorService {
         actorNew.setFirstName(actor.getFirstName());
         actorNew.setLastName(actor.getLastName());
         actorNew.setAge(actor.getAge());
+        actorNew.setCountry(actor.getCountry());
         actorNew.setMovies(actor.getMovies());
         return actorRepository.save(actorNew);
     }
@@ -59,6 +67,7 @@ public class ActorServiceImpl implements ActorService {
         actorUpdated.setFirstName(actor.getFirstName());
         actorUpdated.setLastName(actor.getLastName());
         actorUpdated.setAge(actor.getAge());
+        actorUpdated.setCountry(actor.getCountry());
         actorUpdated.setMovies(actor.getMovies());
         return actorRepository.save(actorUpdated);
     }
@@ -102,10 +111,11 @@ public class ActorServiceImpl implements ActorService {
 
     private void validateActor(Actor actor) {
         try {
-            Pattern p = Pattern.compile("[^a-z]", Pattern.CASE_INSENSITIVE);
+            Pattern p = Pattern.compile("[^a-złążćęśóñ]", Pattern.CASE_INSENSITIVE);
             Matcher matcherFirstName = p.matcher(actor.getFirstName());
             Matcher matcherLastName = p.matcher(actor.getLastName());
-            if (actor.getAge() < 0 || actor.getAge() > 120 || matcherFirstName.find() || matcherLastName.find()) {
+            Matcher matcherCountry = p.matcher(actor.getCountry());
+            if (actor.getAge() < 0 || actor.getAge() > 120 || matcherFirstName.find() || matcherLastName.find() || matcherCountry.find()) {
                 throw new RecordNotSavedException("Invalid actor data");
             }
         } catch (NullPointerException e) {
