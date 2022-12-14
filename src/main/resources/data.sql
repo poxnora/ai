@@ -3,7 +3,7 @@ VALUES ('Scarlett', 'Johansson', 38, 'USA');
 INSERT INTO actors(first_name, last_name, age, country)
 VALUES ('Robert', 'Downey Jr', 57, 'USA');
 INSERT INTO actors(first_name, last_name, age, country)
-VALUES ('Samuel', 'L. Jackson', 73, 'USA');
+VALUES ('Samuel', 'L Jackson', 73, 'USA');
 INSERT INTO actors(first_name, last_name, age, country)
 VALUES ('Chris', 'Hemsworth', 39, 'Australia');
 INSERT INTO actors(first_name, last_name, age, country)

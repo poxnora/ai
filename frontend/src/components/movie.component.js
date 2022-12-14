@@ -113,7 +113,7 @@ class Movie extends Component {
             <div>
                 {currentMovie ? (
                     <div className="edit-form">
-                        <h4>Tutorial</h4>
+                        <h4>Edit Movie</h4>
                         <form>
                             <div>
                                 <div className="form-group">

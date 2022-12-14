@@ -70,7 +70,6 @@ public class MovieServiceImpl implements MovieService {
         if(matcher.find())
             throw new RecordNotSavedException("Invalid data");
         movieUpdated.setGenre(movie.getGenre());
-        movieUpdated.setActors(movie.getActors());
         return movieRepository.save(movieUpdated);
     }
 
