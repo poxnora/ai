@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import ActorService from "../services/actor.service";
+import WorkerService from "../services/worker_service";
 import {withRouter} from '../common/with-router';
 
-class Actor extends Component {
+class Worker extends Component {
     constructor(props) {
         super(props);
         this.onChangeFirstName = this.onChangeFirstName.bind(this);
@@ -78,7 +78,7 @@ class Actor extends Component {
     }
 
     getActor(id) {
-        ActorService.get(id)
+        WorkerService.get(id)
             .then(response => {
                 this.setState({
                     currentActor: response.data
@@ -92,7 +92,7 @@ class Actor extends Component {
 
 
     updateActor() {
-        ActorService.update(
+        WorkerService.update(
             this.state.currentActor.id,
             this.state.currentActor
         )
@@ -109,7 +109,7 @@ class Actor extends Component {
 
 
     deleteActor() {
-        ActorService.delete(this.state.currentActor.id)
+        WorkerService.delete(this.state.currentActor.id)
             .then(response => {
                 console.log(response.data);
                 alert("Deleted actor!");
@@ -128,7 +128,7 @@ class Actor extends Component {
             <div>
                 {currentActor ? (
                     <div className="edit-form">
-                        <h4>Edit Actor</h4>
+                        <h4>Edit Worker</h4>
                         <form>
                             <div className="form-group">
                                 <label htmlFor="firstName">First name</label>
@@ -191,7 +191,7 @@ class Actor extends Component {
                 ) : (
                     <div>
                         <br/>
-                        <p>Select Actor</p>
+                        <p>Select Worker</p>
                     </div>
                 )}
             </div>
@@ -199,4 +199,4 @@ class Actor extends Component {
     }
 }
 
-export default withRouter(Actor);
+export default withRouter(Worker);

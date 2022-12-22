@@ -3,13 +3,13 @@ import {Link, Route, Routes} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import AddActor from "./components/addActor.component";
-import Actor from "./components/actor.component";
-import ActorList from "./components/actorList.component";
-import AddMovie from "./components/addMovie.component";
-import Movie from "./components/movie.component";
-import MovieList from "./components/movieList.component";
-import ActorMovie from "./components/actorMovie.component";
+import AddWorker from "./components/addWorker.component";
+import Actor from "./components/worker.component";
+import WorkerList from "./components/workerList.component";
+import AddMovie from "./components/addCompany.component";
+import Movie from "./components/company.component";
+import CompanyList from "./components/companyList.component";
+import ActorMovie from "./components/workerCompany.component";
 
 class App extends Component {
     render() {
@@ -18,24 +18,24 @@ class App extends Component {
                 <nav className="navbar navbar-expand navbar-dark bg-dark">
                     <div className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <Link to={"/actors"} className="nav-link">
-                                Actors
+                            <Link to={"/workers"} className="nav-link">
+                                Workers
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={"/movies"} className="nav-link">
-                                Movies
+                            <Link to={"/companies"} className="nav-link">
+                                Companies
                             </Link>
                         </li>
 
                         <li className="nav-item">
-                            <Link to={"/actors/add"} className="nav-link">
-                                Add Actor
+                            <Link to={"/workers/add"} className="nav-link">
+                                Add Worker
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={"/movies/add"} className="nav-link">
-                                Add Movie
+                            <Link to={"/companies/add"} className="nav-link">
+                                Add Company
                             </Link>
                         </li>
 
@@ -44,14 +44,14 @@ class App extends Component {
 
                 <div className="container mt-3">
                     <Routes>
-                        <Route path="/" element={<ActorList/>}/>
-                        <Route path="/actors" element={<ActorList/>}/>
-                        <Route path="/actors/add" element={<AddActor/>}/>
-                        <Route path="/actors/:id" element={<Actor/>}/>
-                        <Route path="/movies" element={<MovieList/>}/>
-                        <Route path="/movies/add" element={<AddMovie/>}/>
-                        <Route path="/movies/:id" element={<Movie/>}/>
-                        <Route path="/actors-movies/:id" element={<ActorMovie/>}/>
+                        <Route path="/" element={<WorkerList/>}/>
+                        <Route path="/workers" element={<WorkerList/>}/>
+                        <Route path="/workers/add" element={<AddWorker/>}/>
+                        <Route path="/workers/:id" element={<worker/>}/>
+                        <Route path="/companies" element={<CompanyList/>}/>
+                        <Route path="/companies/add" element={<AddWorker/>}/>
+                        <Route path="/companies/:id" element={<company/>}/>
+                        <Route path="/workers-companies/:id" element={<workerCompany/>}/>
 
                     </Routes>
                 </div>

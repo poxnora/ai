@@ -1,31 +1,31 @@
 import React, {Component} from "react";
-import MovieDataService from "../services/movie.service";
+import CompanyDataService from "../services/company_service";
 import {Link} from "react-router-dom";
 
-export default class MovieList extends Component {
+export default class CompanyList extends Component {
     constructor(props) {
         super(props);
         this.onChangeSearch = this.onChangeSearch.bind(this);
-        this.retrieveMovies = this.retrieveMovies.bind(this);
+        this.retrieveCompanies = this.retrieveCompanies.bind(this);
         this.refreshList = this.refreshList.bind(this);
-        this.setActiveMovies = this.setActiveMovies.bind(this);
+        this.setActiveCompanies = this.setActiveCompanies.bind(this);
         this.search = this.search.bind(this);
         this.sortTitle = this.sortTitle.bind(this);
 
 
         this.state = {
-            movies: [],
-            currentMovie: null,
+            companies: [],
+            currentCompany: null,
             currentIndex: -1,
             search: "",
-            actors: [],
+            workers: [],
             params: {},
         };
 
     }
 
     componentDidMount() {
-        this.retrieveMovies();
+        this.retrieveCompanies();
     }
 
     onChangeSearch(e) {
@@ -36,12 +36,12 @@ export default class MovieList extends Component {
         });
     }
 
-    retrieveMovies(sort, search) {
+    retrieveCompanies(sort, search) {
         if (sort === undefined)
             sort = "id";
         this.state.params["sortBy"] = sort;
         this.state.params["search"] = this.state.search;
-        MovieDataService.getAll(this.state.params)
+        CompanyDataService.getAll(this.state.params)
             .then(response => {
                 this.setState({
                     movies: response.data
@@ -54,16 +54,16 @@ export default class MovieList extends Component {
     }
 
     refreshList() {
-        this.retrieveMovies();
+        this.retrieveCompanies();
         this.setState({
             currentMovie: null,
             currentIndex: -1
         });
     }
 
-    setActiveMovies(actor, index) {
+    setActiveCompanies(actor, index) {
         this.setState({
-            currentMovie: actor,
+            currentCompany: actor,
             currentIndex: index
         });
     }
@@ -72,24 +72,24 @@ export default class MovieList extends Component {
     search() {
 
         this.setState({
-            currentActor: null,
+            currentWorker: null,
             currentIndex: -1
         });
-        this.retrieveMovies();
+        this.retrieveCompanies();
     }
 
     sortTitle() {
-        let sort = 'Title';
+        let sort = 'Name';
         this.setState({
             currentIndex: -1
         });
-        this.retrieveMovies(sort);
+        this.retrieveCompanies(sort);
 
     }
 
 
     render() {
-        const {search, movies: movies, currentMovie: currentMovie, currentIndex} = this.state;
+        const {search, companies: companies, currentCompany: currentCompany, currentIndex} = this.state;
 
         return (
             <div className="list row">
@@ -114,32 +114,32 @@ export default class MovieList extends Component {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <h4>Movies List</h4>
+                    <h4>Companies List</h4>
                     <button className="btn btn-outline-secondary 50"
-                            type="button" onClick={this.sortTitle}>Title
+                            type="button" onClick={this.sortTitle}>Name
                     </button>
                     <ul className="list-group">
                         <br>
                         </br>
 
-                        {movies &&
-                            movies.map((movies, index) => (
+                        {companies &&
+                            companies.map((companies, index) => (
                                 <li
                                     className={
                                         "list-group-item " +
                                         (index === currentIndex ? "active" : "")
                                     }
-                                    onClick={() => this.setActiveMovies(movies, index)}
+                                    onClick={() => this.setActiveCompanies(companies, index)}
                                     key={index}
                                 >
-                                    {movies.title}
+                                    {companies.name}
                                 </li>
                             ))}
                     </ul>
 
                 </div>
                 <div className="col-md-6">
-                    {currentMovie ? (
+                    {currentCompany ? (
                         <div>
                             <h4>Details</h4>
                             <br>
@@ -148,33 +148,33 @@ export default class MovieList extends Component {
                             </br>
                             <div>
                                 <label>
-                                    <strong>Title:</strong>
+                                    <strong>Name:</strong>
                                 </label>{" "}
-                                {currentMovie.title}
+                                {currentCompany.name}
                             </div>
                             <div>
                                 <label>
-                                    <strong>Description:<br>
+                                    <strong>City:<br>
                                     </br></strong>
                                 </label>{" "}
                                 <br>
                                 </br>
-                                {currentMovie.description}
+                                {currentCompany.city}
                             </div>
                             <div>
                                 <label>
-                                    <strong>Genre:</strong>
+                                    <strong>Branch:</strong>
                                 </label>{" "}
-                                {currentMovie.genre}
+                                {currentCompany.branch}
                             </div>
                             <div>
                                 <label>
-                                    <strong>Actors:</strong>
+                                    <strong>Workers:</strong>
                                 </label>{" "}
-                                {Object.keys(currentMovie.actors).map(function (keyName, keyIndex) {
+                                {Object.keys(currentCompany.workers).map(function (keyName, keyIndex) {
                                     return (
                                         <li key={keyName}>
-                                            {currentMovie.actors[keyName]["firstName"]} {currentMovie.actors[keyName]["lastName"]}
+                                            {currentCompany.workers[keyName]["firstName"]} {currentCompany.workers[keyName]["lastName"]}
 
                                         </li>
                                     )
@@ -184,7 +184,7 @@ export default class MovieList extends Component {
                                 </br>
                             </div>
                             <Link
-                                to={"/movies/" + currentMovie.id}
+                                to={"/companies/" + currentCompany.id}
                                 className="badge badge-primary w-50 p-2"
                             >
                                 Edit

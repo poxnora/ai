@@ -1,15 +1,15 @@
 import React, {Component} from "react";
-import ActorDataService from "../services/actor.service";
+import WorkerDataService from "../services/worker_service";
 
-export default class AddActor extends Component {
+export default class AddWorker extends Component {
     constructor(props) {
         super(props);
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeLastName = this.onChangeLastName.bind(this);
         this.onChangeAge = this.onChangeAge.bind(this);
         this.onChangeCountry = this.onChangeCountry.bind(this);
-        this.addActor = this.addActor.bind(this);
-        this.newActor = this.newActor.bind(this);
+        this.addWorker = this.addWorker.bind(this);
+        this.newWorker = this.newWorker.bind(this);
 
         this.state = {
             id: null,
@@ -45,7 +45,7 @@ export default class AddActor extends Component {
         });
     }
 
-    addActor() {
+    addWorker() {
         const data = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
@@ -53,7 +53,7 @@ export default class AddActor extends Component {
             country: this.state.country
         };
 
-        ActorDataService.create(data)
+        WorkerDataService.create(data)
             .then(response => {
                 this.setState({
                     id: response.data.id,
@@ -71,7 +71,7 @@ export default class AddActor extends Component {
             });
     }
 
-    newActor() {
+    newWorker() {
         this.setState({
             id: null,
             firstName: "",
@@ -135,7 +135,7 @@ export default class AddActor extends Component {
                             name="country"
                         />
                     </div>
-                    <button onClick={this.addActor} className="btn btn-success w-100">
+                    <button onClick={this.addWorker} className="btn btn-success w-100">
                         Submit
                     </button>
                 </div>

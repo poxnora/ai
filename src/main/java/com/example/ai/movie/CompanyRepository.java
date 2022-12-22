@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MovieRepository extends JpaRepository<Movie, Long> {
-    Optional<Movie> findMovieByTitle(String title);
+public interface CompanyRepository extends JpaRepository<Company, Long> {
+    Optional<Company> findCompanyByName(String title);
 
-    Page<Movie> findMovieByTitleContainingIgnoreCaseOrGenreContainingIgnoreCase(String search, String search1, Pageable pageable);
+    Page<Company> findCompanyByNameContainingIgnoreCaseOrBranchContainingIgnoreCase(String search, String search1, Pageable pageable);
 
 }

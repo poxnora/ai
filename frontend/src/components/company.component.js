@@ -1,73 +1,73 @@
 import React, {Component} from "react";
-import MovieDataService from "../services/movie.service";
+import CompanyDataService from "../services/company_service";
 import {withRouter} from '../common/with-router';
 
-class Movie extends Component {
+class Company extends Component {
     constructor(props) {
         super(props);
-        this.onChangeTitle = this.onChangeTitle.bind(this);
-        this.onChangeDescription = this.onChangeDescription.bind(this);
-        this.onChangeGenre = this.onChangeGenre.bind(this);
-        this.getActor = this.getActor.bind(this);
-        this.updateMovie = this.updateMovie.bind(this);
-        this.deleteMovie = this.deleteMovie.bind(this);
+        this.onChangeName = this.onChangeName.bind(this);
+        this.onChangeCity = this.onChangeCity.bind(this);
+        this.onChangeBranch = this.onChangeBranch.bind(this);
+        this.getWorker = this.getWorker.bind(this);
+        this.updateCompany = this.updateCompany.bind(this);
+        this.deleteCompany = this.deleteCompany.bind(this);
 
         this.state = {
-            currentMovie: {
+            currentCompany: {
                 id: null,
-                title: "",
-                description: "",
-                genre: "",
-                actors: []
+                name: "",
+                city: "",
+                branch: "",
+                workers: []
             },
             message: ""
         };
     }
 
     componentDidMount() {
-        this.getActor(this.props.router.params.id);
+        this.getWorker(this.props.router.params.id);
     }
 
-    onChangeTitle(e) {
+    onChangeName(e) {
         const title = e.target.value;
 
         this.setState(function (prevState) {
             return {
-                currentMovie: {
-                    ...prevState.currentMovie,
+                currentCompany: {
+                    ...prevState.currentCompany,
                     title: title
                 }
             };
         });
     }
 
-    onChangeDescription(e) {
+    onChangeCity(e) {
         const description = e.target.value;
 
         this.setState(prevState => ({
-            currentMovie: {
-                ...prevState.currentMovie,
+            currentCompany: {
+                ...prevState.currentCompany,
                 description: description
             }
         }));
     }
 
-    onChangeGenre(e) {
+    onChangeBranch(e) {
         const genre = e.target.value;
 
         this.setState(prevState => ({
-            currentMovie: {
-                ...prevState.currentMovie,
+            currentCompany: {
+                ...prevState.currentCompany,
                 genre: genre
             }
         }));
     }
 
-    getActor(id) {
-        MovieDataService.get(id)
+    getWorker(id) {
+        CompanyDataService.get(id)
             .then(response => {
                 this.setState({
-                    currentMovie: response.data
+                    currentCompany: response.data
                 });
                 console.log(response.data);
             })
@@ -77,15 +77,15 @@ class Movie extends Component {
     }
 
 
-    updateMovie() {
-        MovieDataService.update(
-            this.state.currentMovie.id,
-            this.state.currentMovie
+    updateCompany() {
+        CompanyDataService.update(
+            this.state.currentCompany.id,
+            this.state.currentCompany
         )
             .then(response => {
                 console.log(response.data);
-                alert("Updated movie!");
-                this.props.router.navigate('/movies');
+                alert("Updated company!");
+                this.props.router.navigate('/companies');
             })
             .catch(e => {
                 console.log(e);
@@ -93,12 +93,12 @@ class Movie extends Component {
             });
     }
 
-    deleteMovie() {
-        MovieDataService.delete(this.state.currentMovie.id)
+    deleteCompany() {
+        CompanyDataService.delete(this.state.currentCompany.id)
             .then(response => {
                 console.log(response.data);
-                alert("Deleted movie!");
-                this.props.router.navigate('/movies');
+                alert("Deleted company!");
+                this.props.router.navigate('/companies');
             })
             .catch(e => {
                 console.log(e);
@@ -107,13 +107,13 @@ class Movie extends Component {
     }
 
     render() {
-        const {currentMovie} = this.state;
+        const {currentCompany} = this.state;
 
         return (
             <div>
-                {currentMovie ? (
+                {currentCompany ? (
                     <div className="edit-form">
-                        <h4>Edit Movie</h4>
+                        <h4>Edit Company</h4>
                         <form>
                             <div>
                                 <div className="form-group">
@@ -122,8 +122,8 @@ class Movie extends Component {
                                         type="text"
                                         className="form-control"
                                         id="title"
-                                        value={currentMovie.title}
-                                        onChange={this.onChangeTitle}
+                                        value={currentCompany.name}
+                                        onChange={this.onChangeName}
                                         name="title"
                                     />
                                 </div>
@@ -134,8 +134,8 @@ class Movie extends Component {
                                         type="text"
                                         className="form-control"
                                         id="description"
-                                        value={currentMovie.description}
-                                        onChange={this.onChangeDescription}
+                                        value={currentCompany.city}
+                                        onChange={this.onChangeCity}
                                         name="description"
                                     />
                                 </div>
@@ -145,8 +145,8 @@ class Movie extends Component {
                                         type="text"
                                         className="form-control"
                                         id="Genre"
-                                        value={currentMovie.genre}
-                                        onChange={this.onChangeGenre}
+                                        value={currentCompany.branch}
+                                        onChange={this.onChangeBranch}
                                         name="Genre"
                                     />
                                 </div>
@@ -155,7 +155,7 @@ class Movie extends Component {
 
                         <button
                             className="badge badge-danger  w-50"
-                            onClick={this.deleteMovie}
+                            onClick={this.deleteCompany}
                         >
                             Delete
                         </button>
@@ -163,7 +163,7 @@ class Movie extends Component {
                         <button
                             type="submit"
                             className="badge badge-success w-50"
-                            onClick={this.updateMovie}
+                            onClick={this.updateCompany}
                         >
                             Update
                         </button>
@@ -171,7 +171,7 @@ class Movie extends Component {
                 ) : (
                     <div>
                         <br/>
-                        <p>Select Movie</p>
+                        <p>Select Company</p>
                     </div>
                 )}
             </div>
@@ -179,4 +179,4 @@ class Movie extends Component {
     }
 }
 
-export default withRouter(Movie);
+export default withRouter(Company);

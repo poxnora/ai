@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import ActorDataService from "../services/actor.service";
+import ActorDataService from "../services/worker_service";
 import {Link} from "react-router-dom";
 
-export default class ActorList extends Component {
+export default class WorkerList extends Component {
     constructor(props) {
         super(props);
         this.onChangeSearch = this.onChangeSearch.bind(this);
@@ -15,7 +15,7 @@ export default class ActorList extends Component {
         this.sortAge = this.sortAge.bind(this);
 
         this.state = {
-            actors: [],
+            workers: [],
             currentActor: null,
             currentIndex: -1,
             search: "",
@@ -131,7 +131,7 @@ export default class ActorList extends Component {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <h4>Actors List</h4>
+                    <h4>Workers List</h4>
                     <button className="btn btn-outline-secondary w-33"
                             type="button" onClick={this.sortFirstName}>First Name
                     </button>
@@ -203,7 +203,7 @@ export default class ActorList extends Component {
                                 to={"/actors-movies/" + currentActor.id}
                                 className="badge badge-success w-100 p-2"
                             >
-                                Movies
+                                Companies
                             </Link>
                         </div>
                     ) : (

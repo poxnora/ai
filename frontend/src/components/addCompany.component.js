@@ -1,60 +1,60 @@
 import React, {Component} from "react";
-import MovieDataService from "../services/movie.service";
+import WorkerDataService from "../services/company_service";
 
-export default class AddActor extends Component {
+export default class AddCompany extends Component {
     constructor(props) {
         super(props);
-        this.onChangeTitle = this.onChangeTitle.bind(this);
-        this.onChangeDescription = this.onChangeDescription.bind(this);
-        this.onChangeGenre = this.onChangeGenre.bind(this);
-        this.addMovie = this.addMovie.bind(this);
-        this.newMovie = this.newMovie.bind(this);
+        this.onChangeName = this.onChangeName.bind(this);
+        this.onChangeCity = this.onChangeCity.bind(this);
+        this.onChangeBranch = this.onChangeBranch.bind(this);
+        this.addCompany = this.addCompany.bind(this);
+        this.newCompany = this.newCompany.bind(this);
 
         this.state = {
             id: null,
-            title: "",
-            description: "",
-            genre: "",
-            actors: []
+            name: "",
+            city: "",
+            branch: "",
+            workers: []
         };
 
     }
 
-    onChangeTitle(e) {
+    onChangeName(e) {
         this.setState({
-            title: e.target.value
+            name: e.target.value
         });
     }
 
-    onChangeDescription(e) {
+    onChangeCity(e) {
         this.setState({
-            description: e.target.value
+            city: e.target.value
         });
     }
 
-    onChangeGenre(e) {
+    onChangeBranch(e) {
         this.setState({
-            genre: e.target.value
+            branch: e.target.value
         });
     }
 
-    addMovie() {
+    addCompany() {
         const data = {
-            title: this.state.title,
-            description: this.state.description,
-            genre: this.state.genre
+            name: this.state.name,
+            city: this.state.city,
+            branch: this.state.branch
         };
 
-        MovieDataService.create(data)
+        WorkerDataService.create(data)
             .then(response => {
                 this.setState({
                     id: response.data.id,
-                    title: response.data.title,
-                    description: response.data.description,
-                    genre: response.data.genre,
+                    name: response.data.name,
+                    city: response.data.city,
+                    branch: response.data.branch,
                 });
                 console.log(response.data);
-                alert("Added new movie!");
+                alert("Added new company!");
             })
             .catch(e => {
                 console.log(e);
@@ -62,13 +62,13 @@ export default class AddActor extends Component {
             });
     }
 
-    newMovie() {
+    newCompany() {
         this.setState({
             id: null,
-            title: "",
-            description: "",
-            genre: "",
-            actors: [],
+            name: "",
+            city: "",
+            branch: "",
+            workers: [],
             submitted: false
         });
     }
@@ -85,7 +85,7 @@ export default class AddActor extends Component {
                             id="title"
                             required
                             value={this.state.title}
-                            onChange={this.onChangeTitle}
+                            onChange={this.onChangeName}
                             name="title"
                         />
                     </div>
@@ -97,8 +97,8 @@ export default class AddActor extends Component {
                             className="form-control"
                             id="description"
                             required
-                            value={this.state.description}
-                            onChange={this.onChangeDescription}
+                            value={this.state.city}
+                            onChange={this.onChangeCity}
                             name="description"
                         />
                     </div>
@@ -110,11 +110,11 @@ export default class AddActor extends Component {
                             id="Genre"
                             required
                             value={this.state.genre}
-                            onChange={this.onChangeGenre}
+                            onChange={this.onChangeBranch}
                             name="Genre"
                         />
                     </div>
-                    <button onClick={this.addMovie} className="btn btn-success w-100">
+                    <button onClick={this.addCompany} className="btn btn-success w-100">
                         Submit
                     </button>
                 </div>

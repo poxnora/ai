@@ -1,36 +1,36 @@
 import React, {Component} from "react";
-import MovieDataService from "../services/movie.service";
-import ActorDataService from "../services/actor.service";
+import MovieDataService from "../services/company_service";
+import WorkerDataService from "../services/worker_service";
 import {withRouter} from '../common/with-router';
 
-class actorMovie extends Component {
+class workerCompany extends Component {
     constructor(props) {
         super(props);
         this.onChangeSearch = this.onChangeSearch.bind(this);
-        this.retrieveMovies = this.retrieveMovies.bind(this);
-        this.addActorToMovies = this.addActorToMovies.bind(this);
-        this.removeActorFromMovies = this.removeActorFromMovies.bind(this);
+        this.retrieveCompanies = this.retrieveCompanies.bind(this);
+        this.addWorkerToCompany = this.addWorkerToCompany.bind(this);
+        this.removeWorkerFromCompany = this.removeWorkerFromCompany.bind(this);
         this.refreshList = this.refreshList.bind(this);
-        this.setActiveMovies = this.setActiveMovies.bind(this);
+        this.setActiveCompany = this.setActiveCompany.bind(this);
         this.search = this.search.bind(this);
-        this.sortTitle = this.sortTitle.bind(this);
+        this.sortName = this.sortName.bind(this);
 
 
         this.state = {
-            movies: [],
-            currentMovie: null,
+            companies: [],
+            currentCompany: null,
             currentIndex: -1,
             search: "",
-            actors: [],
+            workers: [],
             params: {},
-            actor_id: 0
+            worker_id: 0
         };
 
     }
 
     componentDidMount() {
-        this.state.actor_id = this.props.router.params.id;
-        this.retrieveMovies();
+        this.state.worker_id = this.props.router.params.id;
+        this.retrieveCompanies();
     }
 
     onChangeSearch(e) {
@@ -41,7 +41,7 @@ class actorMovie extends Component {
         });
     }
 
-    retrieveMovies(sort, search) {
+    retrieveCompanies(sort, search) {
 
         if (sort === undefined)
             sort = "id";
@@ -59,41 +59,41 @@ class actorMovie extends Component {
             });
     }
 
-    addActorToMovies() {
+    addWorkerToCompany() {
 
-        ActorDataService.addActorToMovie(this.state.actor_id, this.state.currentMovie.id)
+        WorkerDataService.addActorToMovie(this.state.worker_id, this.state.currentCompany.id)
             .then(response => {
                 alert("Success!");
-                this.props.router.navigate('/movies');
+                this.props.router.navigate('/companies');
             })
             .catch(e => {
-                alert("Actor already plays in this movie!");
+                alert("Worker already works in this company!");
             });
     }
 
-    removeActorFromMovies() {
+    removeWorkerFromCompany() {
 
-        ActorDataService.deleteActorFromMovie(this.state.actor_id, this.state.currentMovie.id)
+        WorkerDataService.deleteActorFromMovie(this.state.worker_id, this.state.currentCompany.id)
             .then(response => {
                 alert("Success!");
-                this.props.router.navigate('/movies');
+                this.props.router.navigate('/companies');
             })
             .catch(e => {
-                alert("Actor doesn't play in this movie!");
+                alert("Worker doesn't work in this company!");
             });
     }
 
     refreshList() {
-        this.retrieveMovies();
+        this.retrieveCompanies();
         this.setState({
-            currentMovie: null,
+            currentCompany: null,
             currentIndex: -1
         });
     }
 
-    setActiveMovies(actor, index) {
+    setActiveCompany(worker, index) {
         this.setState({
-            currentMovie: actor,
+            currentCompany: worker,
             currentIndex: index
         });
     }
@@ -102,24 +102,24 @@ class actorMovie extends Component {
     search() {
 
         this.setState({
-            currentActor: null,
+            currentCompany: null,
             currentIndex: -1
         });
-        this.retrieveMovies();
+        this.retrieveCompanies();
     }
 
-    sortTitle() {
-        let sort = 'Title';
+    sortName() {
+        let sort = 'Name';
         this.setState({
             currentIndex: -1
         });
-        this.retrieveMovies(sort);
+        this.retrieveCompanies(sort);
 
     }
 
 
     render() {
-        const {search, movies: movies, currentMovie: currentMovie, currentIndex} = this.state;
+        const {search, companies: companies, currentCompany: currentCompany, currentIndex} = this.state;
 
         return (
             <div className="list row">
@@ -144,39 +144,39 @@ class actorMovie extends Component {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <h4>Movies List</h4>
+                    <h4>Companies List</h4>
                     <button className="btn btn-outline-secondary 50"
-                            type="button" onClick={this.sortTitle}>Title
+                            type="button" onClick={this.sortName}>Name
                     </button>
                     <ul className="list-group">
                         <br>
                         </br>
 
-                        {movies &&
-                            movies.map((movies, index) => (
+                        {companies &&
+                            companies.map((movies, index) => (
                                 <li
                                     className={
                                         "list-group-item " +
                                         (index === currentIndex ? "active" : "")
                                     }
-                                    onClick={() => this.setActiveMovies(movies, index)}
+                                    onClick={() => this.setActiveCompany(movies, index)}
                                     key={index}
                                 >
-                                    {movies.title}
+                                    {companies.name}
                                 </li>
                             ))}
                     </ul>
                     <button
                         className="btn btn-success w-25"
                         type="button"
-                        onClick={this.addActorToMovies}
+                        onClick={this.addWorkerToCompany}
                     >
                         Add
                     </button>
                     <button
                         className="btn btn-danger w-25"
                         type="button"
-                        onClick={this.removeActorFromMovies}
+                        onClick={this.removeWorkerFromCompany}
                     >
                         Remove
                     </button>
@@ -188,4 +188,4 @@ class actorMovie extends Component {
     }
 }
 
-export default withRouter(actorMovie);
+export default withRouter(workerCompany);
