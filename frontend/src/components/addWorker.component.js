@@ -63,7 +63,7 @@ export default class AddWorker extends Component {
                     country: response.data.country
                 });
                 console.log(response.data);
-                alert("Added new actor!");
+                alert("Added new worker!");
             })
             .catch(e => {
                 console.log(e);

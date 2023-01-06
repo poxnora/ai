@@ -98,7 +98,7 @@ class Worker extends Component {
         )
             .then(response => {
                 console.log(response.data);
-                alert("Updated actor!");
+                alert("Updated worker!");
                 this.props.router.navigate('/workers');
             })
             .catch(e => {
@@ -112,7 +112,7 @@ class Worker extends Component {
         WorkerService.delete(this.state.currentActor.id)
             .then(response => {
                 console.log(response.data);
-                alert("Deleted actor!");
+                alert("Deleted worker!");
                 this.props.router.navigate('/workers');
             })
             .catch(e => {
