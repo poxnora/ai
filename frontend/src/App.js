@@ -9,7 +9,7 @@ import WorkerList from "./components/workerList.component";
 import AddCompany from "./components/addCompany.component";
 import Company from "./components/company.component";
 import CompanyList from "./components/companyList.component";
-import workerCompany from "./components/workerCompany.component";
+import WorkerCompany from "./components/workerCompany.component";
 
 class App extends Component {
     render() {
@@ -51,7 +51,7 @@ class App extends Component {
                         <Route path="/companies" element={<CompanyList/>}/>
                         <Route path="/companies/add" element={<AddCompany/>}/>
                         <Route path="/companies/:id" element={<Company/>}/>
-                        <Route path="/workers-companies/:id" element={<workerCompany/>}/>
+                        <Route path="/workers-companies/:id" element={<WorkerCompany/>}/>
 
                     </Routes>
                 </div>

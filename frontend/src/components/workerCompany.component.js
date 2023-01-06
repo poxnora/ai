@@ -50,7 +50,7 @@ class workerCompany extends Component {
         MovieDataService.getAll(this.state.params)
             .then(response => {
                 this.setState({
-                    movies: response.data
+                    companies: response.data
                 });
                 console.log(response.data);
             })
@@ -153,13 +153,13 @@ class workerCompany extends Component {
                         </br>
 
                         {companies &&
-                            companies.map((movies, index) => (
+                            companies.map((companies, index) => (
                                 <li
                                     className={
                                         "list-group-item " +
                                         (index === currentIndex ? "active" : "")
                                     }
-                                    onClick={() => this.setActiveCompany(movies, index)}
+                                    onClick={() => this.setActiveCompany(companies, index)}
                                     key={index}
                                 >
                                     {companies.name}

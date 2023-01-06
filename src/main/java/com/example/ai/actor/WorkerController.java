@@ -42,12 +42,12 @@ public class WorkerController {
         return ResponseEntity.ok(workerService.updateWorker(worker, id));
     }
 
-    @PutMapping(path = "/{actor_id}/movies/{movie_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/{actor_id}/companies/{movie_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Worker> addWorkerToCompany(@PathVariable("movie_id") Long movie_id, @PathVariable("actor_id") Long actor_id) {
         return ResponseEntity.ok(workerService.addWorkerToCompany(movie_id, actor_id));
     }
 
-    @DeleteMapping(path = "/{actor_id}/movies/{movie_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(path = "/{actor_id}/companies/{movie_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Worker> deleteWorkerFromCompany(@PathVariable("movie_id") Long movie_id, @PathVariable("actor_id") Long actor_id) {
         return ResponseEntity.ok(workerService.deleteWorkerFromCompany(movie_id, actor_id));
     }
