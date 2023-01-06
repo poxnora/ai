@@ -22,11 +22,11 @@ class ActorDataService {
     }
 
     addActorToMovie(workers_id, company_id) {
-        return http.put(`/workers/${workers_id}workers${company_id}`);
+        return http.put(`/workers/${workers_id}/companies/${company_id}`);
     }
 
     deleteActorFromMovie(workers_id, company_id) {
-        return http.delete(`/workers/${workers_id}/workers/${company_id}`);
+        return http.delete(`/workers/${workers_id}/companies/${company_id}`);
     }
 }
 

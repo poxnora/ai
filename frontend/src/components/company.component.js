@@ -29,36 +29,36 @@ class Company extends Component {
     }
 
     onChangeName(e) {
-        const title = e.target.value;
+        const name = e.target.value;
 
         this.setState(function (prevState) {
             return {
                 currentCompany: {
                     ...prevState.currentCompany,
-                    title: title
+                    name: name
                 }
             };
         });
     }
 
     onChangeCity(e) {
-        const description = e.target.value;
+        const city = e.target.value;
 
         this.setState(prevState => ({
             currentCompany: {
                 ...prevState.currentCompany,
-                description: description
+                city: city
             }
         }));
     }
 
     onChangeBranch(e) {
-        const genre = e.target.value;
+        const branch = e.target.value;
 
         this.setState(prevState => ({
             currentCompany: {
                 ...prevState.currentCompany,
-                genre: genre
+                branch: branch
             }
         }));
     }
@@ -117,37 +117,37 @@ class Company extends Component {
                         <form>
                             <div>
                                 <div className="form-group">
-                                    <label htmlFor="title">Title</label>
+                                    <label htmlFor="name">Name</label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        id="title"
+                                        id="name"
                                         value={currentCompany.name}
                                         onChange={this.onChangeName}
-                                        name="title"
+                                        name="name"
                                     />
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="description">Description</label>
+                                    <label htmlFor="city">City</label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        id="description"
+                                        id="city"
                                         value={currentCompany.city}
                                         onChange={this.onChangeCity}
-                                        name="description"
+                                        name="city"
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="Genre">Genre</label>
+                                    <label htmlFor="branch">Branch</label>
                                     <input
                                         type="text"
                                         className="form-control"
-                                        id="Genre"
+                                        id="branch"
                                         value={currentCompany.branch}
                                         onChange={this.onChangeBranch}
-                                        name="Genre"
+                                        name="branch"
                                     />
                                 </div>
                             </div>

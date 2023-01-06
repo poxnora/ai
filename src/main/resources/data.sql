@@ -1,9 +1,9 @@
 INSERT INTO workers(first_name, last_name, age, country)
 VALUES ('Scarlett', 'Johansson', 38, 'USA');
 INSERT INTO workers(first_name, last_name, age, country)
-VALUES ('Robert', 'Downey Jr', 57, 'USA');
+VALUES ('Robert', 'Downey', 57, 'USA');
 INSERT INTO workers(first_name, last_name, age, country)
-VALUES ('Samuel', 'L Jackson', 73, 'USA');
+VALUES ('Samuel', 'Jackson', 73, 'USA');
 INSERT INTO workers(first_name, last_name, age, country)
 VALUES ('Chris', 'Hemsworth', 39, 'Australia');
 INSERT INTO workers(first_name, last_name, age, country)
@@ -19,11 +19,11 @@ VALUES ('Tom ', 'Hanks', 66, 'USA');
 INSERT INTO workers(first_name, last_name, age, country)
 VALUES ('Vin', 'Diesel', 55, 'USA');
 INSERT INTO companies(name, city, branch)
-VALUES ('Avengers: Endgame',
+VALUES ('Avengers',
         'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos actions and restore balance to the universe.',
         'Action');
 INSERT INTO companies(name, city, branch)
-VALUES ('Top Gun: Maverick',
+VALUES ('Top Gun',
         'After thirty years, Maverick is still pushing the envelope as a top naval aviator, but must confront ghosts of his past when he leads TOP GUNs elite graduates on a mission that demands the ultimate sacrifice from those chosen to fly it.',
         'Action');
 INSERT INTO companies(name, city, branch)
@@ -31,7 +31,7 @@ VALUES ('Avatar',
         'A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.',
         'Action');
 INSERT INTO companies(name, city, branch)
-VALUES ('Toy Story 4',
+VALUES ('Toy Story',
         'When a new toy called "Forky" joins Woody and the gang, a road trip alongside old and new friends reveals how big the world can be for a toy.',
         'Comedy');
 INSERT INTO companies(name, city, branch)

@@ -194,13 +194,13 @@ export default class WorkerList extends Component {
                                 {currentActor.country}
                             </div>
                             <Link
-                                to={"/actors/" + currentActor.id}
+                                to={"/workers/" + currentActor.id}
                                 className="badge badge-primary w-100 p-2"
                             >
                                 Edit
                             </Link>
                             <Link
-                                to={"/actors-movies/" + currentActor.id}
+                                to={"/workers-companies/" + currentActor.id}
                                 className="badge badge-success w-100 p-2"
                             >
                                 Companies

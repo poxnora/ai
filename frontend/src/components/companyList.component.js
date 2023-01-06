@@ -44,7 +44,7 @@ export default class CompanyList extends Component {
         CompanyDataService.getAll(this.state.params)
             .then(response => {
                 this.setState({
-                    movies: response.data
+                    companies: response.data
                 });
                 console.log(response.data);
             })

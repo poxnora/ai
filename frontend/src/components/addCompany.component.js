@@ -78,7 +78,7 @@ export default class AddCompany extends Component {
             <div className="submit-form ">
                 <div>
                     <div className="form-group">
-                        <label htmlFor="title">Title</label>
+                        <label htmlFor="title">Name</label>
                         <input
                             type="text"
                             className="form-control"
@@ -91,7 +91,7 @@ export default class AddCompany extends Component {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="description">Description</label>
+                        <label htmlFor="description">City</label>
                         <input
                             type="text"
                             className="form-control"
@@ -103,7 +103,7 @@ export default class AddCompany extends Component {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="Genre">Genre</label>
+                        <label htmlFor="Genre">Branch</label>
                         <input
                             type="text"
                             className="form-control"

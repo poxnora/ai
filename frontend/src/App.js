@@ -4,12 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import AddWorker from "./components/addWorker.component";
-import Actor from "./components/worker.component";
+import Worker from "./components/worker.component";
 import WorkerList from "./components/workerList.component";
-import AddMovie from "./components/addCompany.component";
-import Movie from "./components/company.component";
+import AddCompany from "./components/addCompany.component";
+import Company from "./components/company.component";
 import CompanyList from "./components/companyList.component";
-import ActorMovie from "./components/workerCompany.component";
+import workerCompany from "./components/workerCompany.component";
 
 class App extends Component {
     render() {
@@ -47,10 +47,10 @@ class App extends Component {
                         <Route path="/" element={<WorkerList/>}/>
                         <Route path="/workers" element={<WorkerList/>}/>
                         <Route path="/workers/add" element={<AddWorker/>}/>
-                        <Route path="/workers/:id" element={<worker/>}/>
+                        <Route path="/workers/:id" element={<Worker/>}/>
                         <Route path="/companies" element={<CompanyList/>}/>
-                        <Route path="/companies/add" element={<AddWorker/>}/>
-                        <Route path="/companies/:id" element={<company/>}/>
+                        <Route path="/companies/add" element={<AddCompany/>}/>
+                        <Route path="/companies/:id" element={<Company/>}/>
                         <Route path="/workers-companies/:id" element={<workerCompany/>}/>
 
                     </Routes>

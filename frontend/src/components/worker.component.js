@@ -99,7 +99,7 @@ class Worker extends Component {
             .then(response => {
                 console.log(response.data);
                 alert("Updated actor!");
-                this.props.router.navigate('/actors');
+                this.props.router.navigate('/workers');
             })
             .catch(e => {
                 console.log(e);
@@ -113,7 +113,7 @@ class Worker extends Component {
             .then(response => {
                 console.log(response.data);
                 alert("Deleted actor!");
-                this.props.router.navigate('/actors');
+                this.props.router.navigate('/workers');
             })
             .catch(e => {
                 console.log(e);
