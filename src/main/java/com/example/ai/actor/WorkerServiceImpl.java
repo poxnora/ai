@@ -26,7 +26,9 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker getWorkerById(Long id) {
-        return workerRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("No worker with id: " + id + " found"));
+
+        return workerRepository.findById(id).orElseThrow(() ->
+                new RecordNotFoundException("No worker with id: " + id + " found"));
     }
 
     @Override
@@ -38,7 +40,8 @@ public class WorkerServiceImpl implements WorkerService {
         Page<Worker> pagingUser;
 
         if (search != null) {
-            pagingUser = workerRepository.findWorkerByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(search, search, pageRequest);
+            pagingUser = workerRepository.findWorkerByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase
+                    (search, search, pageRequest);
             return pagingUser.getContent();
         }
         pagingUser = workerRepository.findAll(pageRequest);
@@ -92,7 +95,8 @@ public class WorkerServiceImpl implements WorkerService {
     public Worker deleteWorkerFromCompany(Long company_id, Long worker_id) {
 
         Worker workerUpdated = getWorkerById(worker_id);
-        Company companyUpdated = companyRepository.findById(company_id).orElseThrow(() -> new RecordNotFoundException("No worker with id: " + company_id + " found"));
+        Company companyUpdated = companyRepository.findById(company_id).orElseThrow(() ->
+                new RecordNotFoundException("No worker with id: " + company_id + " found"));
         if (!companyUpdated.getWorkers().contains(workerUpdated))
             throw new RecordNotSavedException("That worker does not work in this company");
         List<Company> companyList = workerUpdated.getCompanies();
@@ -115,7 +119,8 @@ public class WorkerServiceImpl implements WorkerService {
             Matcher matcherFirstName = p.matcher(worker.getFirstName());
             Matcher matcherLastName = p.matcher(worker.getLastName());
             Matcher matcherCountry = p.matcher(worker.getCountry());
-            if (worker.getAge() < 0 || worker.getAge() > 120 || matcherFirstName.find() || matcherLastName.find() || matcherCountry.find()) {
+            if (worker.getAge() < 0 || worker.getAge() > 120
+                    || matcherFirstName.find() || matcherLastName.find() || matcherCountry.find()) {
                 throw new RecordNotSavedException("Invalid worker data");
             }
         } catch (NullPointerException e) {
