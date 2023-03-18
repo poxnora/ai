@@ -1,10 +1,15 @@
 pipeline {
-    agent any
+    agent {
+        any
+    }
     stages {
         stage('Build') {
             steps {
-               echo 'This is a minimal pipeline.'
+                sh './mvnw -B -DskipTests clean package'
             }
         }
+
+
+
     }
 }
